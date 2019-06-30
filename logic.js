@@ -55,7 +55,6 @@ function buttonHandler(id) {
 		break_time = 5;
 		updateAll();
 	}
-
 }
 
 function updateAll() {
@@ -67,13 +66,13 @@ function updateAll() {
 }
 
 function startClock() {
+	beep()
 	isOn = true;
 	timer_ele.style.color = "rgb(35, 226, 35)"
 	session_text.style.color = "rgb(35, 226, 35)"
 	session_time = String(session_time);
 	let minutes = Number(session_time.substring(0, 2)) - 1;
 	let seconds = 59;
-
 
 	let intervalId = setInterval(function () {
 		if (!isPause) {
@@ -90,9 +89,9 @@ function startClock() {
 			}
 
 			if (minutes == 0 && seconds == 0) {
+				clearInterval(intervalId);
 				breakTime();
 				session_text.style.color = "black"
-				clearInterval(intervalId);
 			}
 		}
 	}, 1000);
@@ -127,11 +126,8 @@ function startClock() {
 
 }
 
-
-
-
 function breakTime() {
-
+	beep()
 	isOn = true;
 	timer_ele.style.color = "rgb(35, 226, 35)";
 	break_text.style.color = "rgb(35, 226, 35)";
@@ -187,7 +183,36 @@ function breakTime() {
 		timer_ele.style.color = "black";
 		break_ele.style.color = "black";
 		session_ele.style.color = "black";
-		s
+
 	});
 
 }
+
+
+var audioCtx = new(window.AudioContext || window.webkitAudioContext || window.audioContext);
+
+function beep(duration, frequency, volume, type, callback) {
+	var oscillator = audioCtx.createOscillator();
+	var gainNode = audioCtx.createGain();
+
+	oscillator.connect(gainNode);
+	gainNode.connect(audioCtx.destination);
+
+	if (volume) {
+		gainNode.gain.value = volume;
+	};
+	if (frequency) {
+		oscillator.frequency.value = frequency;
+	}
+	if (type) {
+		oscillator.type = type;
+	}
+	if (callback) {
+		oscillator.onended = callback;
+	}
+
+	oscillator.start();
+	setTimeout(function () {
+		oscillator.stop()
+	}, (duration ? duration : 500));
+};
