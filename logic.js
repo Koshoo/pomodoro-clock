@@ -111,17 +111,15 @@ function startClock() {
 	});
 
 	stop_btn.addEventListener("click", () => {
-		clearInterval(intervalId)
-		timer_ele.style.color = "black"
+		clearInterval(intervalId);
 		isOn = false;
 		isPause = false;
 		session_ele.textContent = session_time;
 		break_ele.textContent = break_time;
 		timer_ele.textContent = session_time + ":00";
+		session_text.style.color = "black";
 		timer_ele.style.color = "black";
 		break_ele.style.color = "black";
-		session_ele.style.color = "black";
-
 	});
 
 }
@@ -174,7 +172,6 @@ function breakTime() {
 
 	stop_btn.addEventListener("click", () => {
 		clearInterval(intervalId)
-		timer_ele.style.color = "black";
 		isOn = false;
 		isPause = false;
 		session_ele.textContent = session_time;
@@ -182,8 +179,7 @@ function breakTime() {
 		timer_ele.textContent = session_time + ":00";
 		timer_ele.style.color = "black";
 		break_ele.style.color = "black";
-		session_ele.style.color = "black";
-
+		session_text.style.color = "black";
 	});
 
 }
