@@ -3,12 +3,12 @@ const session_ele = document.querySelector("#session-time");
 const break_ele = document.querySelector("#break-time");
 const session_text = document.querySelector("#session");
 const break_text = document.querySelector("#break");
-const start_btn = document.querySelector("#start-btn");
 const reset_btn = document.querySelector("#reset-btn");
 const pause_btn = document.querySelector("#pause-btn");
 const stop_btn = document.querySelector("#stop-btn");
 //Buttons array for eventlisteners
 const buttons = document.querySelectorAll(".btn");
+
 let isOn = false;
 let session_time = String(25);
 let break_time = 5;
@@ -196,7 +196,7 @@ function beep(duration, frequency, volume, type, callback) {
 
 	if (volume) {
 		gainNode.gain.value = volume;
-	};
+	}
 	if (frequency) {
 		oscillator.frequency.value = frequency;
 	}
@@ -211,4 +211,4 @@ function beep(duration, frequency, volume, type, callback) {
 	setTimeout(function () {
 		oscillator.stop()
 	}, (duration ? duration : 500));
-};
+}
